@@ -6,25 +6,20 @@ A modular, event-driven personal assistant controlled via Telegram. A central se
 
 ## Architecture
 
-```
-Telegram
-    │  (polling)
-    ▼
-┌─────────────────────────┐
-│    pa-central-messager  │  ← Telegram gateway + Jarvis NL routing
-└────────────┬────────────┘
-             │  NATS request/reply (unique per-call inbox)
-    ┌─────────▼──────────────────────────────────┐
-    │                   NATS                      │
-    └─────┬──────────────┬────────────────┬───────┘
-          │              │                │
-   ┌──────▼──────┐ ┌─────▼──────┐ ┌──────▼──────┐
-   │pa-train-    │ │pa-cost-    │ │pa-assistant │
-   │monitor      │ │tracker     │ │  (Jarvis)   │
-   └──────┬──────┘ └─────┬──────┘ └──────┬──────┘
-          │              │                │
-          └──────────────►◄───────────────┘
-                  reply → pa-central-messager → Telegram
+```mermaid
+flowchart TD
+    TG([Telegram])
+    CM["**pa-central-messager**\nTelegram gateway · Jarvis NL routing"]
+    NATS[("NATS\nMessage Queue")]
+    TM["**pa-train-monitor**\nNational Rail live departures\n& disruption monitoring"]
+    CT["**pa-cost-tracker**\nTransaction recording\n& LLM spend analysis"]
+    AS["**pa-assistant**\nJarvis — freeform NL\nbacked by local Ollama"]
+
+    TG <-->|polling| CM
+    CM -->|"NATS request/reply"| NATS
+    NATS --> TM & CT & AS
+    TM & CT & AS -->|reply via unique inbox| CM
+    TM -.->|"notify.{chat_id}\nproactive alerts"| CM
 ```
 
 Freeform messages are handled by **Jarvis** (`pa-assistant`), which uses a local Ollama LLM to parse intent and dispatch to the appropriate service — so you can say _"what trains are there from Stevenage to Kings Cross?"_ instead of typing `/train SVG KGX`.
