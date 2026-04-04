@@ -25,7 +25,7 @@ sequenceDiagram
     CM->>TG: 6. send_message(chat_id, reply)
     TG->>U: response received
 
-    Note over S,CM: Proactive alerts skip steps 1–3:<br/>pa-train-monitor publishes directly to notify.{chat_id}
+    Note over S,CM: Proactive alerts skip steps 1–3:<br/>pa-train-monitor publishes directly to notify.{chat_id}<br/>pa-assistant also publishes PR-ready alerts to notify.{chat_id}
 ```
 
 Freeform messages are handled by **Jarvis** (`pa-assistant`), which uses a local Ollama LLM to parse intent and dispatch to the appropriate service — so you can say _"what trains are there from Stevenage to Kings Cross?"_ instead of typing `/train SVG KGX`.
@@ -42,7 +42,7 @@ Proactive train disruption alerts flow on a separate `notify.*` subject without 
 | [pa-central-messager](https://github.com/sneakybver-assistant/pa-central-messager) | Telegram polling, command routing, freeform → Jarvis, NATS gateway |
 | [pa-train-monitor](https://github.com/sneakybver-assistant/pa-train-monitor) | UK National Rail live departures (Realtime Trains API), background disruption monitoring with proactive alerts |
 | [pa-cost-tracker](https://github.com/sneakybver-assistant/pa-cost-tracker) | Credit/debit card transaction recording, 30-day spend summaries, LLM-powered analysis |
-| [pa-assistant](https://github.com/sneakybver-assistant/pa-assistant) | Jarvis — freeform NL interface backed by a local Ollama model, dispatches to other services transparently |
+| [pa-assistant](https://github.com/sneakybver-assistant/pa-assistant) | Jarvis — freeform NL interface backed by a local Ollama model; dispatches to other services transparently; creates GitHub Issues via `/code` to invoke the Copilot cloud agent; manages service containers via `/restart` and `/logs` |
 
 ---
 
@@ -81,6 +81,10 @@ cd pa-infra
 | `/spend` | pa-cost-tracker | `/spend` |
 | `/analyse` | pa-cost-tracker | `/analyse` |
 | `/ask [question]` | pa-assistant | `/ask what is inflation?` |
+| `/code [repo] [description]` | pa-assistant | `/code pa-cost-tracker add a /ping command` |
+| `/restart [service]` | pa-assistant | `/restart pa-train-monitor` |
+| `/logs [service]` | pa-assistant | `/logs pa-cost-tracker` |
+| `/help` | handled locally | `/help` |
 | Freeform text | Jarvis → auto-routes | `what trains are from Stevenage today?` |
 
 ---
