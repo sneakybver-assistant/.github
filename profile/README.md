@@ -9,11 +9,11 @@ A modular, event-driven personal assistant controlled via Telegram. A central se
 ```mermaid
 flowchart TD
     TG([Telegram])
-    CM["**pa-central-messager**\nTelegram gateway · Jarvis NL routing"]
+    CM["pa-central-messager\nTelegram gateway · Jarvis NL routing"]
     NATS[("NATS\nMessage Queue")]
-    TM["**pa-train-monitor**\nNational Rail live departures\n& disruption monitoring"]
-    CT["**pa-cost-tracker**\nTransaction recording\n& LLM spend analysis"]
-    AS["**pa-assistant**\nJarvis — freeform NL\nbacked by local Ollama"]
+    TM["pa-train-monitor\nNational Rail live departures\n& disruption monitoring"]
+    CT["pa-cost-tracker\nTransaction recording\n& LLM spend analysis"]
+    AS["pa-assistant\nJarvis — freeform NL\nbacked by local Ollama"]
 
     TG <-->|polling| CM
     CM -->|"NATS request/reply"| NATS
