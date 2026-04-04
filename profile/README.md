@@ -19,7 +19,7 @@ sequenceDiagram
     Note right of CM: routes by /command<br/>or Jarvis NL intent classification
     CM->>N: 2. publish to service.{train|cost|assistant}
     N->>S: 3. deliver to subscribed service
-    Note right of S: pa-train-monitor<br/>pa-cost-tracker<br/>pa-assistant
+    Note right of S: pa-train-monitor<br/>pa-cost-tracker<br/>pa-task-manager<br/>pa-assistant
     S->>N: 4. reply to unique inbox (_INBOX.xxx)
     N->>CM: 5. deliver reply
     CM->>TG: 6. send_message(chat_id, reply)
@@ -42,6 +42,7 @@ Proactive train disruption alerts flow on a separate `notify.*` subject without 
 | [pa-central-messager](https://github.com/sneakybver-assistant/pa-central-messager) | Telegram polling, command routing, freeform → Jarvis, NATS gateway |
 | [pa-train-monitor](https://github.com/sneakybver-assistant/pa-train-monitor) | UK National Rail live departures (Realtime Trains API), background disruption monitoring with proactive alerts |
 | [pa-cost-tracker](https://github.com/sneakybver-assistant/pa-cost-tracker) | Credit/debit card transaction recording, 30-day spend summaries, LLM-powered analysis |
+| [pa-task-manager](https://github.com/sneakybver-assistant/pa-task-manager) | Personal task management — add, list, search, complete, and delete tasks with due dates and priorities |
 | [pa-assistant](https://github.com/sneakybver-assistant/pa-assistant) | Jarvis — freeform NL interface backed by a local Ollama model; dispatches to other services transparently; creates GitHub Issues via `/code` to invoke the Copilot cloud agent; manages service containers via `/restart` and `/logs` |
 
 ---
@@ -80,6 +81,11 @@ cd pa-infra
 | `/cost [description]` | pa-cost-tracker | `/cost Waitrose £42.50` |
 | `/spend` | pa-cost-tracker | `/spend` |
 | `/analyse` | pa-cost-tracker | `/analyse` |
+| `/task [description]` | pa-task-manager | `/task File taxes 2026-04-30 high` |
+| `/tasks [filter?]` | pa-task-manager | `/tasks today` |
+| `/donetask [id]` | pa-task-manager | `/donetask 3` |
+| `/deltask [id]` | pa-task-manager | `/deltask 5` |
+| `/searchtask [query]` | pa-task-manager | `/searchtask dentist` |
 | `/ask [question]` | pa-assistant | `/ask what is inflation?` |
 | `/code [repo] [description]` | pa-assistant | `/code pa-cost-tracker add a /ping command` |
 | `/restart [service]` | pa-assistant | `/restart pa-train-monitor` |
