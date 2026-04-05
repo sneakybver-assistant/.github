@@ -49,13 +49,14 @@ Proactive train disruption alerts flow on a separate `notify.*` subject without 
 
 ## Quick Start
 
-**Prerequisites:** Docker, all five repos cloned as siblings, an [Ollama](https://ollama.com) instance running (local or remote).
+**Prerequisites:** Docker, all six repos cloned as siblings, an [Ollama](https://ollama.com) instance running (local or remote).
 
 ```bash
 git clone https://github.com/sneakybver-assistant/pa-infra
 git clone https://github.com/sneakybver-assistant/pa-central-messager
 git clone https://github.com/sneakybver-assistant/pa-train-monitor
 git clone https://github.com/sneakybver-assistant/pa-cost-tracker
+git clone https://github.com/sneakybver-assistant/pa-task-manager
 git clone https://github.com/sneakybver-assistant/pa-assistant
 
 cd pa-infra
