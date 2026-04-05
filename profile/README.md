@@ -89,8 +89,11 @@ cd pa-infra
 | `/donetask [id]` | pa-task-manager | `/donetask 3` |
 | `/deltask [id]` | pa-task-manager | `/deltask 5` |
 | `/searchtask [query]` | pa-task-manager | `/searchtask dentist` |
+| `/health` | pa-task-manager | `/health` |
+| `/version` | pa-task-manager | `/version` |
 | `/ask [question]` | pa-assistant | `/ask what is inflation?` |
 | `/build [description]` | pa-build-agent | `/build add a /health endpoint to all services` |
+| `/cancel-builds` | pa-build-agent | `/cancel-builds` |
 | `/restart [service]` | pa-assistant | `/restart pa-train-monitor` |
 | `/logs [service]` | pa-assistant | `/logs pa-cost-tracker` |
 | `/help` | handled locally | `/help` |
