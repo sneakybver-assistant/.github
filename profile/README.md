@@ -43,7 +43,8 @@ Proactive train disruption alerts flow on a separate `notify.*` subject without 
 | [pa-train-monitor](https://github.com/sneakybver-assistant/pa-train-monitor) | UK National Rail live departures (Realtime Trains API), background disruption monitoring with proactive alerts |
 | [pa-cost-tracker](https://github.com/sneakybver-assistant/pa-cost-tracker) | Credit/debit card transaction recording, 30-day spend summaries, LLM-powered analysis |
 | [pa-task-manager](https://github.com/sneakybver-assistant/pa-task-manager) | Personal task management — add, list, search, complete, and delete tasks with due dates and priorities |
-| [pa-assistant](https://github.com/sneakybver-assistant/pa-assistant) | Jarvis — freeform NL interface backed by a local Ollama model; dispatches to other services transparently; creates GitHub Issues via `/code` to invoke the Copilot cloud agent; manages service containers via `/restart` and `/logs` |
+| [pa-assistant](https://github.com/sneakybver-assistant/pa-assistant) | Jarvis — freeform NL interface backed by a local Ollama model; dispatches to other services transparently; manages service containers via `/restart` and `/logs` |
+| [pa-build-agent](https://github.com/sneakybver-assistant/pa-build-agent) | Autonomous multi-repo coding agent — runs a Claude agentic loop on `/build` requests; reads/writes files across repos, commits, pushes, and opens PRs; sends threaded Telegram updates throughout |
 
 ---
 
@@ -58,6 +59,7 @@ git clone https://github.com/sneakybver-assistant/pa-train-monitor
 git clone https://github.com/sneakybver-assistant/pa-cost-tracker
 git clone https://github.com/sneakybver-assistant/pa-task-manager
 git clone https://github.com/sneakybver-assistant/pa-assistant
+git clone https://github.com/sneakybver-assistant/pa-build-agent
 
 cd pa-infra
 ./start.sh        # creates .env on first run — fill in credentials, then run again
@@ -88,7 +90,7 @@ cd pa-infra
 | `/deltask [id]` | pa-task-manager | `/deltask 5` |
 | `/searchtask [query]` | pa-task-manager | `/searchtask dentist` |
 | `/ask [question]` | pa-assistant | `/ask what is inflation?` |
-| `/code [repo] [description]` | pa-assistant | `/code pa-cost-tracker add a /ping command` |
+| `/build [description]` | pa-build-agent | `/build add a /health endpoint to all services` |
 | `/restart [service]` | pa-assistant | `/restart pa-train-monitor` |
 | `/logs [service]` | pa-assistant | `/logs pa-cost-tracker` |
 | `/help` | handled locally | `/help` |
