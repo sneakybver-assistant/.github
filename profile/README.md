@@ -40,7 +40,7 @@ Proactive train disruption alerts flow on a separate `notify.*` subject without 
 |---|---|
 | [pa-infra](https://github.com/sneakybver-assistant/pa-infra) | Docker Compose stack, `.env`, `start.sh`, `deploy.sh` — the single entry point to run everything |
 | [pa-central-messager](https://github.com/sneakybver-assistant/pa-central-messager) | Telegram polling, command routing, freeform → Jarvis, NATS gateway |
-| [pa-train-monitor](https://github.com/sneakybver-assistant/pa-train-monitor) | UK National Rail live departures (Realtime Trains API), background disruption monitoring with proactive alerts |
+| [pa-train-monitor](https://github.com/sneakybver-assistant/pa-train-monitor) | UK National Rail live departures, arrivals, calling points, saved routes, station status, and background disruption monitoring with proactive alerts (Realtime Trains API v2) |
 | [pa-cost-tracker](https://github.com/sneakybver-assistant/pa-cost-tracker) | Credit/debit card transaction recording, 30-day spend summaries, LLM-powered analysis |
 | [pa-task-manager](https://github.com/sneakybver-assistant/pa-task-manager) | Personal task management — add, list, search, complete, and delete tasks with due dates and priorities |
 | [pa-assistant](https://github.com/sneakybver-assistant/pa-assistant) | Jarvis — freeform NL interface backed by a local Ollama model; dispatches to other services transparently; manages service containers via `/restart` and `/logs` |
@@ -78,6 +78,14 @@ cd pa-infra
 | Command | Routes to | Example |
 |---|---|---|
 | `/train [from] [to]` | pa-train-monitor | `/train SVG KGX` |
+| `/train [from] [to] [HH:MM]` | pa-train-monitor | `/train SVG KGX 18:09` |
+| `/train [from] [to] [timeframe]` | pa-train-monitor | `/train SVG KGX 2h` |
+| `/train [name]` | pa-train-monitor | `/train commute` |
+| `/arrivals [station]` | pa-train-monitor | `/arrivals HSH` |
+| `/calling [station] [HH:MM]` | pa-train-monitor | `/calling HSH 08:15` |
+| `/status [station]` | pa-train-monitor | `/status GTW` |
+| `/saveroute [name] [from] [to?]` | pa-train-monitor | `/saveroute commute HSH LBG` |
+| `/routes` | pa-train-monitor | `/routes` |
 | `/monitor [from] [to] [HH:MM] [days?]` | pa-train-monitor | `/monitor SVG KGX 18:09 weekdays` |
 | `/unmonitor [from] [to]` or `all` | pa-train-monitor | `/unmonitor all` |
 | `/monitors` | pa-train-monitor | `/monitors` |
