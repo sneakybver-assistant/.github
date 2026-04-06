@@ -93,11 +93,12 @@ cd pa-infra
 | `/spend` | pa-cost-tracker | `/spend` |
 | `/analyse` | pa-cost-tracker | `/analyse` |
 | `/task [description]` | pa-task-manager | `/task File taxes 2026-04-30 high` |
-| `/tasks [filter?]` | pa-task-manager | `/tasks today` |
+| `/tasks [filter?]` | pa-task-manager | `/tasks today` or `/tasks done` or `/tasks all` |
 | `/donetask [id]` | pa-task-manager | `/donetask 3` |
 | `/deltask [id]` | pa-task-manager | `/deltask 5` |
 | `/restoretask [id]` | pa-task-manager | `/restoretask 5` |
 | `/uncompletetask [id]` | pa-task-manager | `/uncompletetask 3` |
+| `/undone [id]` | pa-task-manager | `/undone 3` |
 | `/deletedtasks` | pa-task-manager | `/deletedtasks` |
 | `/searchtask [query]` | pa-task-manager | `/searchtask dentist` |
 | `/edittask [id] [changes]` | pa-task-manager | `/edittask 3 due 2026-04-12 high` |
