@@ -100,6 +100,7 @@ cd pa-infra
 | `/uncompletetask [id]` | pa-task-manager | `/uncompletetask 3` |
 | `/deletedtasks` | pa-task-manager | `/deletedtasks` |
 | `/searchtask [query]` | pa-task-manager | `/searchtask dentist` |
+| `/edittask [id] [changes]` | pa-task-manager | `/edittask 3 due 2026-04-12 high` |
 | `/ask [question]` | pa-assistant | `/ask what is inflation?` |
 | `/build [description]` | pa-build-agent | `/build add a /health endpoint to all services` |
 | `/restart [service]` | pa-assistant | `/restart pa-train-monitor` |
