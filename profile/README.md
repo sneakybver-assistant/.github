@@ -42,7 +42,7 @@ Proactive train disruption alerts flow on a separate `notify.*` subject without 
 | [pa-central-messager](https://github.com/sneakybver-assistant/pa-central-messager) | Telegram polling, command routing, freeform → Jarvis, NATS gateway |
 | [pa-train-monitor](https://github.com/sneakybver-assistant/pa-train-monitor) | UK National Rail live departures, arrivals, calling points, saved routes, station status, and background disruption monitoring with proactive alerts (Realtime Trains API v2) |
 | [pa-cost-tracker](https://github.com/sneakybver-assistant/pa-cost-tracker) | Credit/debit card transaction recording, 30-day spend summaries, LLM-powered analysis |
-| [pa-task-manager](https://github.com/sneakybver-assistant/pa-task-manager) | Personal task management — add, list, search, complete, and delete tasks with due dates and priorities |
+| [pa-task-manager](https://github.com/sneakybver-assistant/pa-task-manager) | Personal task management — add, list, search, complete, and delete tasks with due dates and priorities; soft-deletion with recovery and un-complete support |
 | [pa-assistant](https://github.com/sneakybver-assistant/pa-assistant) | Jarvis — freeform NL interface backed by a local Ollama model; dispatches to other services transparently; manages service containers via `/restart` and `/logs` |
 | [pa-build-agent](https://github.com/sneakybver-assistant/pa-build-agent) | Autonomous multi-repo coding agent — runs a Claude agentic loop on `/build` requests; reads/writes files across repos, commits, pushes, and opens PRs; sends threaded Telegram updates throughout |
 
@@ -96,6 +96,9 @@ cd pa-infra
 | `/tasks [filter?]` | pa-task-manager | `/tasks today` |
 | `/donetask [id]` | pa-task-manager | `/donetask 3` |
 | `/deltask [id]` | pa-task-manager | `/deltask 5` |
+| `/restoretask [id]` | pa-task-manager | `/restoretask 5` |
+| `/uncompletetask [id]` | pa-task-manager | `/uncompletetask 3` |
+| `/deletedtasks` | pa-task-manager | `/deletedtasks` |
 | `/searchtask [query]` | pa-task-manager | `/searchtask dentist` |
 | `/ask [question]` | pa-assistant | `/ask what is inflation?` |
 | `/build [description]` | pa-build-agent | `/build add a /health endpoint to all services` |
